@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Gb Weather</string>
+    <string name="city_label">City</string>
+    <string name="enter_city">Enter city</string>
 </resources>

@@ -2,4 +2,19 @@
     <string name="app_name">Gb Weather</string>
     <string name="city_label">City</string>
     <string name="enter_city">Enter city</string>
+    <string name="cities_list_title">Cities</string>
+    <string name="cities_list_label_name">name</string>
+    <string name="cities_list_label_favorite">favorite</string>
+    <string name="city_moscow">Moscow</string>
+    <string name="city_norilsk">Norilsk</string>
+    <string name="city_london">London</string>
+    <string name="city_kokshetau">Kokshetau</string>
+    <string name="city_resolut">Resolut</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_dark_theme">Dark theme</string>
+    <string name="temp_scale_label">Temp scale</string>
+    <string name="add_info_label">Additional information:</string>
+    <string name="wind_label">Wind</string>
+    <string name="pressure_label">Pressure</string>
+    <string name="humidity_label">Humidity</string>
 </resources>

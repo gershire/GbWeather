@@ -3,4 +3,19 @@
     <string name="app_name">Gb Погода</string>
     <string name="city_label">Город</string>
     <string name="enter_city">Введите город</string>
+    <string name="cities_list_title">Города</string>
+    <string name="cities_list_label_name">название</string>
+    <string name="cities_list_label_favorite">избранный</string>
+    <string name="city_moscow">Москва</string>
+    <string name="city_norilsk">Норильск</string>
+    <string name="city_london">Лондон</string>
+    <string name="city_kokshetau">Кокшетау</string>
+    <string name="city_resolut">Резолют</string>
+    <string name="settings_title">Настройки</string>
+    <string name="settings_dark_theme">Темная тема</string>
+    <string name="temp_scale_label">Температурная шкала</string>
+    <string name="add_info_label">Дополнительная информация:</string>
+    <string name="wind_label">Ветер</string>
+    <string name="pressure_label">Давление</string>
+    <string name="humidity_label">Влажность</string>
 </resources>

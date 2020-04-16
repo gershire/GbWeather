@@ -18,15 +18,15 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tempOutput = null;
     private AutoCompleteTextView cityInput = null;
+    private String city = "";
     private TextView.OnEditorActionListener cityInputListener =
             new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     boolean handled = false;
                     if (actionId == EditorInfo.IME_ACTION_SEARCH && tempOutput != null) {
-                        String city = v.getText().toString();
+                        city = v.getText().toString();
                         Log.d(INPUT, "onEditorAction: input city is " + city);
-                        setCity(city);
                         updateTemp();
                         handled = true;
                     }
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void populateView() {
-        String city = getCity();
         if (city != null) {
             cityInput.setText(city);
             updateTemp();
@@ -64,21 +63,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateTemp() {
-        tempOutput.setText(WeatherService.getTemp(getCity()));
-    }
-
-    private String getCity() {
-        return DataStorage.getInstance().getCity();
-    }
-
-    private void setCity(String city) {
-        DataStorage.getInstance().setCity(city);
+        tempOutput.setText(WeatherService.getTemp(city));
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         Log.d(LIFECYCLE, "onSaveInstanceState: called");
-        outState.putString(BUNDLE_CITY, getCity());
+        outState.putString(BUNDLE_CITY, city);
         super.onSaveInstanceState(outState);
         showToast("Activity state saved");
     }
@@ -87,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         Log.d(LIFECYCLE, "onRestoreInstanceState: called");
         super.onRestoreInstanceState(savedInstanceState);
-        setCity(savedInstanceState.getString(BUNDLE_CITY));
+        city = savedInstanceState.getString(BUNDLE_CITY);
         populateView();
         showToast("Activity state restored");
     }

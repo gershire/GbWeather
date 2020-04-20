@@ -1,63 +1,59 @@
 package com.gershire.gb.weather;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.gershire.gb.weather.global.Constants;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String BUNDLE_CITY = "CITY";
-    private static final String LIFECYCLE = "LIFECYCLE";
-    private static final String INPUT = "INPUT";
 
     private TextView tempOutput = null;
-    private AutoCompleteTextView cityInput = null;
+    private TextView cityNameOutput = null;
     private String city = "";
-    private TextView.OnEditorActionListener cityInputListener =
-            new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    boolean handled = false;
-                    if (actionId == EditorInfo.IME_ACTION_SEARCH && tempOutput != null) {
-                        city = v.getText().toString();
-                        Log.d(INPUT, "onEditorAction: input city is " + city);
-                        updateTemp();
-                        handled = true;
-                    }
-                    return handled;
-                }
-            };
+    private final static int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(LIFECYCLE, "onCreate: called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        showToast("Activity created");
+
+        findViewById(R.id.enterCityBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EnterCityActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode != REQUEST_CODE) {
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+
+        if (resultCode == RESULT_OK) {
+            city = data != null ? data.getStringExtra(Constants.INTENT_CITY) : null;
+            populateView();
+        }
     }
 
     private void initView() {
         tempOutput = findViewById(R.id.tempLabel);
-        cityInput = findViewById(R.id.cityInput);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                WeatherService.getCities());
-        cityInput.setAdapter(adapter);
-        cityInput.setOnEditorActionListener(cityInputListener);
+        cityNameOutput = findViewById(R.id.cityName);
     }
 
 
     private void populateView() {
         if (city != null) {
-            cityInput.setText(city);
+            cityNameOutput.setText(city);
             updateTemp();
         }
     }
@@ -68,64 +64,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.d(LIFECYCLE, "onSaveInstanceState: called");
-        outState.putString(BUNDLE_CITY, city);
+        outState.putString(Constants.BUNDLE_CITY, city);
         super.onSaveInstanceState(outState);
-        showToast("Activity state saved");
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        Log.d(LIFECYCLE, "onRestoreInstanceState: called");
         super.onRestoreInstanceState(savedInstanceState);
-        city = savedInstanceState.getString(BUNDLE_CITY);
+        city = savedInstanceState.getString(Constants.BUNDLE_CITY);
         populateView();
-        showToast("Activity state restored");
-    }
-
-    @Override
-    protected void onStart() {
-        Log.d(LIFECYCLE, "onStart: called");
-        super.onStart();
-        showToast("Activity started");
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d(LIFECYCLE, "onResume: called");
-        super.onResume();
-        showToast("Activity resumed");
-    }
-
-    @Override
-    protected void onRestart() {
-        Log.d(LIFECYCLE, "onRestart: called");
-        super.onRestart();
-        showToast("Activity restarted");
-    }
-
-    @Override
-    protected void onPause() {
-        Log.d(LIFECYCLE, "onPause: called");
-        super.onPause();
-        showToast("Activity paused");
-    }
-
-    @Override
-    protected void onStop() {
-        Log.d(LIFECYCLE, "onStop: called");
-        super.onStop();
-        showToast("Activity stopped");
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(LIFECYCLE, "onDestroy: called");
-        super.onDestroy();
-        showToast("Activity destroyed");
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -18,4 +18,8 @@
     <string name="wind_label">Ветер</string>
     <string name="pressure_label">Давление</string>
     <string name="humidity_label">Влажность</string>
+    <string name="show_weather">показать погоду</string>
+    <string name="not_chosen">не выбран</string>
+    <string name="choose">выбрать</string>
+    <string name="not_chosen_alert">Пожалуйста выберите город</string>
 </resources>

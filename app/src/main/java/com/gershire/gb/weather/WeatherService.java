@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WeatherService {
-    static String lastInput = "";
     private static Map<String, Integer> tempMap = new HashMap<String, Integer>() {{
         put("london", 20);
         put("moscow", 12);
@@ -41,9 +40,5 @@ public class WeatherService {
         String template = "%s%dºC";
         String sign = (temp > 0) ? "+" : "";
         return String.format(template, sign, temp);
-    }
-
-    static String getLastTemp() {
-        return getTemp(lastInput);
     }
 }

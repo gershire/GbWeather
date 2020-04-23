@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cities">
+        <item>London</item>
+        <item>Moscow</item>
+        <item>Norilsk</item>
+        <item>Kokshetau</item>
+        <item>Resolute</item>
+    </string-array>
+
+    <integer-array name="temperature">
+        <item>20</item>
+        <item>12</item>
+        <item>4</item>
+        <item>0</item>
+        <item>-16</item>
+    </integer-array>
+</resources>

@@ -43,4 +43,8 @@ public class WeatherFragment extends Fragment {
         ((TextView) view.findViewById(R.id.tempTextView)).setText(temp);
         return view;
     }
+
+    public String getCity() {
+        return city;
+    }
 }

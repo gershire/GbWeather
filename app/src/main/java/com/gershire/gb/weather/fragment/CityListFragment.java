@@ -1,10 +1,13 @@
 package com.gershire.gb.weather.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +15,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gershire.gb.weather.R;
+import com.gershire.gb.weather.WeatherActivity;
 import com.gershire.gb.weather.global.Constants;
 
+import static android.app.Activity.RESULT_OK;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class CityListFragment extends Fragment {
 
     private String selectedCity = null;
     private boolean isLandscape;
+    private final static int SHOW_WEATHER_REQUEST_CODE = 2;
 
     public CityListFragment() {}
 
@@ -46,6 +50,12 @@ public class CityListFragment extends Fragment {
         showWeather();
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString(Constants.BUNDLE_CITY, selectedCity);
+        super.onSaveInstanceState(outState);
+    }
+
     private void addElement(LinearLayout layout, String city) {
         TextView element = new TextView(getContext());
         element.setText(city);
@@ -55,6 +65,7 @@ public class CityListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectedCity = ((TextView) v).getText().toString();
+                Log.d(Constants.TAG_INPUT, "onClick: " + selectedCity);
                 showWeather();
             }
         });
@@ -62,9 +73,59 @@ public class CityListFragment extends Fragment {
 
     private void showWeather() {
         if (isLandscape) {
-            // create fragment
-        } else {
-            // call activity
+            showWeatherFragment();
+        } else if (selectedCity != null) {
+            showWeatherActivity();
+        }
+    }
+
+    private void showWeatherFragment() {
+        WeatherFragment fragment = null;
+        if (getFragmentManager() != null) {
+            fragment = (WeatherFragment) getFragmentManager()
+                    .findFragmentById(R.id.weather_frame);
+        }
+        if (fragment == null || selectedCity == null || !selectedCity.equals(fragment.getCity())) {
+            WeatherFragment f = WeatherFragment.newInstance(selectedCity);
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.weather_frame, f)
+                    .commit();
+        }
+    }
+
+    private void showWeatherActivity() {
+        Intent intent = new Intent();
+        Context ctx = getActivity();
+        if (ctx == null)
+            Log.e(Constants.TAG_ERROR, "Could not get activity");
+        else {
+            intent.setClass(getActivity(), WeatherActivity.class);
+            intent.putExtra(Constants.BUNDLE_CITY, selectedCity);
+
+            /*
+                После того, как пользователь нажал BACK на экране с погодой в портретной ориентации,
+                нужно обнулить сбросить значение выбранного города.
+                Иначе после смены ориентации на альбомную и обратно пользователь снова увидит
+                экран погоды для выбранного ранее города,
+                хотя будет ожидать увидеть список городов.
+
+                Чтобы решить эту проблему, я использую startActivityForResult() вместо startActivity()
+                и обнуляю переменную selectedCity после возвращения.
+            */
+            startActivityForResult(intent, SHOW_WEATHER_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode != SHOW_WEATHER_REQUEST_CODE) {
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+
+        if (resultCode == RESULT_OK) {
+            selectedCity = null;
         }
     }
 }

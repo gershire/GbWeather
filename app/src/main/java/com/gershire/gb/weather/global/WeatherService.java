@@ -34,6 +34,7 @@ public class WeatherService {
     }
 
     public static String getTemp(String city) {
+        if (city == null) return "";
         Integer temp = tempMap.get(city.toLowerCase());
         if (temp == null)
             return "";

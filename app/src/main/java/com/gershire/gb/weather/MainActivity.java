@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gershire.gb.weather.global.Constants;
+import com.gershire.gb.weather.global.WeatherService;
 
 public class MainActivity extends AppCompatActivity {
 

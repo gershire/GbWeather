@@ -10,6 +10,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gershire.gb.weather.global.WeatherService;
+
 import static com.gershire.gb.weather.global.Constants.INTENT_CITY;
 
 public class EnterCityActivity extends AppCompatActivity {

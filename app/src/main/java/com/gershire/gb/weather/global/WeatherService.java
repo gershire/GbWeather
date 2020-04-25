@@ -1,4 +1,4 @@
-package com.gershire.gb.weather;
+package com.gershire.gb.weather.global;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class WeatherService {
         put("резолют", -16);
     }};
 
-    static String[] getCities() {
+    public static String[] getCities() {
         String[] c = tempMap.keySet().toArray(new String[0]);
         for (int i = 0; i < c.length; ++i) {
             c[i] = capitalize(c[i]);
@@ -33,7 +33,8 @@ public class WeatherService {
         }
     }
 
-    static String getTemp(String city) {
+    public static String getTemp(String city) {
+        if (city == null) return "";
         Integer temp = tempMap.get(city.toLowerCase());
         if (temp == null)
             return "";

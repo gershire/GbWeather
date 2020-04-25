@@ -9,13 +9,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gershire.gb.weather.global.Constants;
+import com.gershire.gb.weather.global.WeatherService;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView tempOutput = null;
     private TextView cityNameOutput = null;
     private String city = "";
-    private final static int REQUEST_CODE = 1;
+    private final static int ENTER_CITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EnterCityActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
+                startActivityForResult(intent, ENTER_CITY_REQUEST_CODE);
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode != REQUEST_CODE) {
+        if (requestCode != ENTER_CITY_REQUEST_CODE) {
             super.onActivityResult(requestCode, resultCode, data);
             return;
         }

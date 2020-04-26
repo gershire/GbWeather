@@ -38,7 +38,7 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
-        String temp = WeatherService.getTemp(city);
+        String temp = WeatherService.getWeather(city).getTemperature();
         ((TextView) view.findViewById(R.id.cityTextView)).setText(city);
         ((TextView) view.findViewById(R.id.tempTextView)).setText(temp);
         return view;

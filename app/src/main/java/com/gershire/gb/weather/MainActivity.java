@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gershire.gb.weather.global.Constants;
-import com.gershire.gb.weather.global.WeatherService;
+import com.gershire.gb.weather.model.CityWeather;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView tempOutput = null;
     private TextView cityNameOutput = null;
-    private String city = "";
+    private CityWeather cityWeather = null;
     private final static int ENTER_CITY_REQUEST_CODE = 1;
 
     @Override
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (resultCode == RESULT_OK) {
-            city = data != null ? data.getStringExtra(Constants.INTENT_CITY) : null;
+        if (resultCode == RESULT_OK && data != null) {
+            cityWeather = data.getParcelableExtra(Constants.INTENT_CITY);
             populateView();
         }
     }
@@ -53,26 +53,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void populateView() {
-        if (city != null) {
-            cityNameOutput.setText(city);
-            updateTemp();
+        if (cityWeather != null) {
+            cityNameOutput.setText(cityWeather.getName());
+            tempOutput.setText(cityWeather.getTemperature());
         }
-    }
-
-    private void updateTemp() {
-        tempOutput.setText(WeatherService.getTemp(city));
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString(Constants.BUNDLE_CITY, city);
+        outState.putParcelable(Constants.BUNDLE_CITY, cityWeather);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        city = savedInstanceState.getString(Constants.BUNDLE_CITY);
+        cityWeather = savedInstanceState.getParcelable(Constants.BUNDLE_CITY);
         populateView();
     }
 }

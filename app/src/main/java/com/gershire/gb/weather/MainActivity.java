@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gershire.gb.weather.global.Constants;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tempOutput = null;
     private TextView cityNameOutput = null;
+    private ImageView cityBackground = null;
     private CityWeather cityWeather = null;
     private final static int ENTER_CITY_REQUEST_CODE = 1;
 
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         tempOutput = findViewById(R.id.tempLabel);
         cityNameOutput = findViewById(R.id.cityName);
+        cityBackground = findViewById(R.id.cityBackGround);
     }
 
 
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         if (cityWeather != null) {
             cityNameOutput.setText(cityWeather.getName());
             tempOutput.setText(cityWeather.getTemperature());
+            cityBackground.setImageDrawable(getDrawable(cityWeather.getBgId()));
         }
     }
 

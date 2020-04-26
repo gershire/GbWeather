@@ -1,5 +1,6 @@
 package com.gershire.gb.weather.global;
 
+import com.gershire.gb.weather.R;
 import com.gershire.gb.weather.model.CityWeather;
 
 import java.util.HashMap;
@@ -7,16 +8,16 @@ import java.util.Map;
 
 public class WeatherService {
     private static Map<String, CityWeather> weatherMap = new HashMap<String, CityWeather>() {{
-        put("london", new CityWeather("London", 20));
-        put("moscow", new CityWeather("Moscow", 12));
-        put("norilsk", new CityWeather("Norilsk", 4));
-        put("kokshetau", new CityWeather("Kokshetau",0));
-        put("resolute", new CityWeather("Resolute", -16));
-        put("лондон", new CityWeather("Лондон",20));
-        put("москва", new CityWeather("Москва", 12));
-        put("норильск", new CityWeather("Норильск", 4));
-        put("кокшетау", new CityWeather("Кокшетау", 0));
-        put("резолют", new CityWeather("Резолют", -16));
+        put("london", new CityWeather("London", 20, R.drawable.london));
+        put("moscow", new CityWeather("Moscow", 12, R.drawable.moscow));
+        put("norilsk", new CityWeather("Norilsk", 4, R.drawable.norilsk));
+        put("kokshetau", new CityWeather("Kokshetau",0, R.drawable.kokshetau));
+        put("resolute", new CityWeather("Resolute", -16, R.drawable.resolute));
+        put("лондон", new CityWeather("Лондон",20, R.drawable.london));
+        put("москва", new CityWeather("Москва", 12, R.drawable.moscow));
+        put("норильск", new CityWeather("Норильск", 4, R.drawable.norilsk));
+        put("кокшетау", new CityWeather("Кокшетау", 0, R.drawable.kokshetau));
+        put("резолют", new CityWeather("Резолют", -16, R.drawable.resolute));
     }};
 
     public static String[] getCities() {

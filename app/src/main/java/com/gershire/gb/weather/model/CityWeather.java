@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.gershire.gb.weather.R;
 
+import java.util.Objects;
+
 public class CityWeather implements Parcelable {
     private String name;
     private int temperature;
@@ -79,4 +81,20 @@ public class CityWeather implements Parcelable {
                     return new CityWeather[size];
                 }
             };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CityWeather that = (CityWeather) o;
+        return temperature == that.temperature &&
+                bgId == that.bgId &&
+                Objects.equals(name, that.name) &&
+                conditions == that.conditions;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, temperature, bgId, conditions);
+    }
 }

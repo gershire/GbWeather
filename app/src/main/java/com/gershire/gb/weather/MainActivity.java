@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tempOutput = null;
     private TextView cityNameOutput = null;
     private ImageView cityBackground = null;
+    private ImageView conditionsIcon = null;
     private CityWeather cityWeather = null;
     private final static int ENTER_CITY_REQUEST_CODE = 1;
 
@@ -52,14 +53,15 @@ public class MainActivity extends AppCompatActivity {
         tempOutput = findViewById(R.id.tempLabel);
         cityNameOutput = findViewById(R.id.cityName);
         cityBackground = findViewById(R.id.cityBackGround);
+        conditionsIcon = findViewById(R.id.conditionsIcon);
     }
-
 
     private void populateView() {
         if (cityWeather != null) {
             cityNameOutput.setText(cityWeather.getName());
             tempOutput.setText(cityWeather.getTemperature());
             cityBackground.setImageDrawable(getDrawable(cityWeather.getBgId()));
+            conditionsIcon.setImageDrawable(getDrawable(cityWeather.getConditions()));
         }
     }
 

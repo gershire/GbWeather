@@ -2,22 +2,23 @@ package com.gershire.gb.weather.global;
 
 import com.gershire.gb.weather.R;
 import com.gershire.gb.weather.model.CityWeather;
+import com.gershire.gb.weather.model.WeatherConditions;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class WeatherService {
     private static Map<String, CityWeather> weatherMap = new HashMap<String, CityWeather>() {{
-        put("london", new CityWeather("London", 20, R.drawable.london));
-        put("moscow", new CityWeather("Moscow", 12, R.drawable.moscow));
-        put("norilsk", new CityWeather("Norilsk", 4, R.drawable.norilsk));
-        put("kokshetau", new CityWeather("Kokshetau",0, R.drawable.kokshetau));
-        put("resolute", new CityWeather("Resolute", -16, R.drawable.resolute));
-        put("лондон", new CityWeather("Лондон",20, R.drawable.london));
-        put("москва", new CityWeather("Москва", 12, R.drawable.moscow));
-        put("норильск", new CityWeather("Норильск", 4, R.drawable.norilsk));
-        put("кокшетау", new CityWeather("Кокшетау", 0, R.drawable.kokshetau));
-        put("резолют", new CityWeather("Резолют", -16, R.drawable.resolute));
+        put("london", new CityWeather("London", 20, R.drawable.london, WeatherConditions.OVERCAST));
+        put("moscow", new CityWeather("Moscow", 12, R.drawable.moscow, WeatherConditions.SUN));
+        put("norilsk", new CityWeather("Norilsk", 4, R.drawable.norilsk, WeatherConditions.SLEET));
+        put("kokshetau", new CityWeather("Kokshetau",0, R.drawable.kokshetau, WeatherConditions.OVERCAST));
+        put("resolute", new CityWeather("Resolute", -16, R.drawable.resolute, WeatherConditions.SNOW));
+        put("лондон", new CityWeather("Лондон",20, R.drawable.london, WeatherConditions.OVERCAST));
+        put("москва", new CityWeather("Москва", 12, R.drawable.moscow, WeatherConditions.SUN));
+        put("норильск", new CityWeather("Норильск", 4, R.drawable.norilsk, WeatherConditions.SLEET));
+        put("кокшетау", new CityWeather("Кокшетау", 0, R.drawable.kokshetau, WeatherConditions.OVERCAST));
+        put("резолют", new CityWeather("Резолют", -16, R.drawable.resolute, WeatherConditions.SNOW));
     }};
 
     public static String[] getCities() {

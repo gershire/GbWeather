@@ -30,12 +30,25 @@
             android:id="@+id/tempLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="+16ºC"
             android:textColor="@android:color/background_dark"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/conditionsIcon"
             app:layout_constraintTop_toBottomOf="@+id/cityName" />
+
+        <ImageView
+            android:id="@+id/conditionsIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tempLabel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityName"
+            app:srcCompat="@drawable/snow_occasional" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout

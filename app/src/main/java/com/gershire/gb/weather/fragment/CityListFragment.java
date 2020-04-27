@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,11 +42,24 @@ public class CityListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
         super.onViewCreated(view, bundle);
-        String[] cities = getResources().getStringArray(R.array.cities);
         LinearLayout layout = (LinearLayout) view;
-        for (String city : cities) {
-            addElement(layout, city);
-        }
+
+        RecyclerView recycler = layout.findViewById(R.id.recycler_view);
+        recycler.setHasFixedSize(true);
+        recycler.setLayoutManager(new LinearLayoutManager(layout.getContext()));
+
+        CityListAdapter adapter = new CityListAdapter(new CityListDataSource(getResources()));
+        recycler.setAdapter(adapter);
+        adapter.setOnItemClickListener(new CityListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                String cityName = ((TextView) view).getText().toString();
+                selectedCity = WeatherService.getWeather(cityName);
+                Log.d(Constants.TAG_INPUT, "onClick: " + cityName);
+                showWeather();
+            }
+        });
+
         if (bundle != null)
             selectedCity = bundle.getParcelable(Constants.BUNDLE_CITY);
         isLandscape = getResources().getConfiguration().orientation

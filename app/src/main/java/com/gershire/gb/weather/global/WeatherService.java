@@ -1,24 +1,28 @@
 package com.gershire.gb.weather.global;
 
+import com.gershire.gb.weather.R;
+import com.gershire.gb.weather.model.CityWeather;
+import com.gershire.gb.weather.model.WeatherConditions;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class WeatherService {
-    private static Map<String, Integer> tempMap = new HashMap<String, Integer>() {{
-        put("london", 20);
-        put("moscow", 12);
-        put("norilsk", 4);
-        put("kokshetau", 0);
-        put("resolute", -16);
-        put("лондон", 20);
-        put("москва", 12);
-        put("норильск", 4);
-        put("кокшетау", 0);
-        put("резолют", -16);
+    private static Map<String, CityWeather> weatherMap = new HashMap<String, CityWeather>() {{
+        put("london", new CityWeather("London", 20, R.drawable.london, WeatherConditions.OVERCAST));
+        put("moscow", new CityWeather("Moscow", 12, R.drawable.moscow, WeatherConditions.SUN));
+        put("norilsk", new CityWeather("Norilsk", 4, R.drawable.norilsk, WeatherConditions.SLEET));
+        put("kokshetau", new CityWeather("Kokshetau",0, R.drawable.kokshetau, WeatherConditions.OVERCAST));
+        put("resolute", new CityWeather("Resolute", -16, R.drawable.resolute, WeatherConditions.SNOW));
+        put("лондон", new CityWeather("Лондон",20, R.drawable.london, WeatherConditions.OVERCAST));
+        put("москва", new CityWeather("Москва", 12, R.drawable.moscow, WeatherConditions.SUN));
+        put("норильск", new CityWeather("Норильск", 4, R.drawable.norilsk, WeatherConditions.SLEET));
+        put("кокшетау", new CityWeather("Кокшетау", 0, R.drawable.kokshetau, WeatherConditions.OVERCAST));
+        put("резолют", new CityWeather("Резолют", -16, R.drawable.resolute, WeatherConditions.SNOW));
     }};
 
     public static String[] getCities() {
-        String[] c = tempMap.keySet().toArray(new String[0]);
+        String[] c = weatherMap.keySet().toArray(new String[0]);
         for (int i = 0; i < c.length; ++i) {
             c[i] = capitalize(c[i]);
         }
@@ -33,13 +37,11 @@ public class WeatherService {
         }
     }
 
-    public static String getTemp(String city) {
-        if (city == null) return "";
-        Integer temp = tempMap.get(city.toLowerCase());
-        if (temp == null)
-            return "";
-        String template = "%s%dºC";
-        String sign = (temp > 0) ? "+" : "";
-        return String.format(template, sign, temp);
+    public static CityWeather getWeather(String city) {
+        if (city != null) {
+            return weatherMap.get(city.toLowerCase());
+        } else {
+            return null;
+        }
     }
 }

@@ -16,8 +16,6 @@ import static com.gershire.gb.weather.global.Constants.INTENT_CITY;
 
 public class EnterCityActivity extends AppCompatActivity {
 
-    private String city = "";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +36,7 @@ public class EnterCityActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), getString(R.string.not_chosen_alert), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent();
-                    intent.putExtra(INTENT_CITY, city);
+                    intent.putExtra(INTENT_CITY, WeatherService.getWeather(city));
                     setResult(RESULT_OK, intent);
                     finish();
                 }

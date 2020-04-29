@@ -14,11 +14,19 @@ public class WeatherService {
         put("norilsk", new CityWeather("Norilsk", 4, R.drawable.norilsk, WeatherConditions.SLEET));
         put("kokshetau", new CityWeather("Kokshetau",0, R.drawable.kokshetau, WeatherConditions.OVERCAST));
         put("resolute", new CityWeather("Resolute", -16, R.drawable.resolute, WeatherConditions.SNOW));
+        put("paris", new CityWeather("Paris", 15, R.drawable.paris, WeatherConditions.OVERCAST));
+        put("berlin", new CityWeather("Berlin", 14, R.drawable.berlin, WeatherConditions.OVERCAST));
+        put("madrid", new CityWeather("Madrid", 27, R.drawable.madrid, WeatherConditions.SUN));
+        put("tel-aviv", new CityWeather("Tel-Aviv", 31, R.drawable.telaviv, WeatherConditions.SUN));
         put("лондон", new CityWeather("Лондон",20, R.drawable.london, WeatherConditions.OVERCAST));
         put("москва", new CityWeather("Москва", 12, R.drawable.moscow, WeatherConditions.SUN));
         put("норильск", new CityWeather("Норильск", 4, R.drawable.norilsk, WeatherConditions.SLEET));
         put("кокшетау", new CityWeather("Кокшетау", 0, R.drawable.kokshetau, WeatherConditions.OVERCAST));
         put("резолют", new CityWeather("Резолют", -16, R.drawable.resolute, WeatherConditions.SNOW));
+        put("париж", new CityWeather("Париж", 15, R.drawable.paris, WeatherConditions.OVERCAST));
+        put("берлин", new CityWeather("Берлин", 14, R.drawable.berlin, WeatherConditions.OVERCAST));
+        put("мадрид", new CityWeather("Мадрид", 27, R.drawable.madrid, WeatherConditions.SUN));
+        put("тель-авив", new CityWeather("Тель-Авив", 31, R.drawable.telaviv, WeatherConditions.SUN));
     }};
 
     public static String[] getCities() {

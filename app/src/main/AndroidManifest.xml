@@ -12,14 +12,14 @@
         <activity
             android:name=".MainNavigationActivity"
             android:label="@string/title_activity_main_navigation">
+        </activity>
+        <activity android:name=".WeatherActivity" />
+        <activity android:name=".FragmentedMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".WeatherActivity" />
-        <activity android:name=".FragmentedMainActivity">
         </activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".EnterCityActivity" />

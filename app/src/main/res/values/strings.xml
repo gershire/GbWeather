@@ -21,4 +21,8 @@
     <string name="not_chosen">not chosen</string>
     <string name="choose">choose</string>
     <string name="not_chosen_alert">Please choose the city</string>
+    <string name="title_activity_main_navigation">MainNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

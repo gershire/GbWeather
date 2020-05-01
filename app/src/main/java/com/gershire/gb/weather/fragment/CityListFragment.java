@@ -4,18 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gershire.gb.weather.R;
 import com.gershire.gb.weather.WeatherActivity;
@@ -100,15 +100,13 @@ public class CityListFragment extends Fragment {
     }
 
     private void showWeatherFragment() {
-        WeatherFragment fragment = null;
-        if (getFragmentManager() != null) {
-            fragment = (WeatherFragment) getFragmentManager()
-                    .findFragmentById(R.id.weather_frame);
-        }
+        WeatherFragment fragment = (WeatherFragment) getParentFragmentManager()
+                .findFragmentById(R.id.weather_frame);
+
         if (fragment == null || selectedCity == null || !selectedCity.equals(fragment.getCityWeather())) {
             WeatherFragment f = WeatherFragment.newInstance(selectedCity);
 
-            getFragmentManager().beginTransaction()
+            getParentFragmentManager().beginTransaction()
                     .replace(R.id.weather_frame, f)
                     .commit();
         }

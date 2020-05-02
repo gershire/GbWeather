@@ -3,8 +3,10 @@ package com.gershire.gb.weather.fragment;
 import android.content.res.Resources;
 
 import com.gershire.gb.weather.R;
+import com.gershire.gb.weather.global.WeatherService;
+import com.gershire.gb.weather.model.CityWeather;
 
-public class CityListDataSource implements DataSource<String> {
+public class CityListDataSource implements DataSource<CityWeather> {
     private String[] cities;
 
     public CityListDataSource(Resources resources) {
@@ -12,8 +14,8 @@ public class CityListDataSource implements DataSource<String> {
     }
 
     @Override
-    public String getItem(int i) {
-        return cities[i];
+    public CityWeather getItem(int i) {
+        return WeatherService.getWeather(cities[i]);
     }
 
     @Override

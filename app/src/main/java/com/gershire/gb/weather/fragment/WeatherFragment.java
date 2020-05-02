@@ -2,16 +2,18 @@ package com.gershire.gb.weather.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.gershire.gb.weather.R;
 import com.gershire.gb.weather.global.Constants;
 import com.gershire.gb.weather.model.CityWeather;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class WeatherFragment extends Fragment {
@@ -48,6 +50,7 @@ public class WeatherFragment extends Fragment {
                     .setImageDrawable(context.getDrawable(cityWeather.getBgId()));
             ((ImageView) view.findViewById(R.id.conditionsIcon))
                     .setImageDrawable(context.getDrawable(cityWeather.getConditions()));
+            Snackbar.make(view, getString(R.string.selected_city) + cityWeather.getName(), Snackbar.LENGTH_SHORT).show();
         }
         return view;
     }

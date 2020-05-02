@@ -4,17 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gershire.gb.weather.R;
 import com.gershire.gb.weather.WeatherActivity;
@@ -53,7 +54,8 @@ public class CityListFragment extends Fragment {
         adapter.setOnItemClickListener(new CityListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                String cityName = ((TextView) view).getText().toString();
+                TextView textView = view.findViewById(R.id.item_label);
+                String cityName = textView.getText().toString();
                 selectedCity = WeatherService.getWeather(cityName);
                 Log.d(Constants.TAG_INPUT, "onClick: " + cityName);
                 showWeather();
@@ -98,15 +100,13 @@ public class CityListFragment extends Fragment {
     }
 
     private void showWeatherFragment() {
-        WeatherFragment fragment = null;
-        if (getFragmentManager() != null) {
-            fragment = (WeatherFragment) getFragmentManager()
-                    .findFragmentById(R.id.weather_frame);
-        }
+        WeatherFragment fragment = (WeatherFragment) getParentFragmentManager()
+                .findFragmentById(R.id.weather_frame);
+
         if (fragment == null || selectedCity == null || !selectedCity.equals(fragment.getCityWeather())) {
             WeatherFragment f = WeatherFragment.newInstance(selectedCity);
 
-            getFragmentManager().beginTransaction()
+            getParentFragmentManager().beginTransaction()
                     .replace(R.id.weather_frame, f)
                     .commit();
         }

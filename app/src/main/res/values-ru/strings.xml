@@ -22,4 +22,6 @@
     <string name="not_chosen">не выбран</string>
     <string name="choose">выбрать</string>
     <string name="not_chosen_alert">Пожалуйста выберите город</string>
+    <string name="selected_city">"Выбран город: "</string>
+    <string name="apply">Применить</string>
 </resources>

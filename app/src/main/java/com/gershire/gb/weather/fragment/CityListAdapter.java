@@ -1,13 +1,17 @@
 package com.gershire.gb.weather.fragment;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gershire.gb.weather.R;
+import com.gershire.gb.weather.model.CityWeather;
 
 public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHolder> {
     private CityListDataSource dataSource;
@@ -27,7 +31,7 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.getLabel().setText(dataSource.getItem(i));
+        viewHolder.populate(dataSource.getItem(i));
     }
 
     @Override
@@ -44,22 +48,31 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView cityImage;
+        private ImageView condImage;
         private TextView label;
+        private View itemView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            cityImage = itemView.findViewById(R.id.city_card_image);
+            condImage = itemView.findViewById(R.id.cond_card_image);
             label = itemView.findViewById(R.id.item_label);
-            label.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onItemClickListener != null)
                         onItemClickListener.onItemClick(v, getAdapterPosition());
                 }
             });
+            this.itemView = itemView;
         }
 
-        public TextView getLabel() {
-            return label;
+        public void populate(CityWeather data) {
+            label.setText(data.getName());
+            Context context = itemView.getContext();
+            cityImage.setImageDrawable(context.getDrawable(data.getBgId()));
+            condImage.setImageDrawable(context.getDrawable(data.getConditions()));
         }
     }
 }

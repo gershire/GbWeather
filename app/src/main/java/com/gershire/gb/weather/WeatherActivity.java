@@ -3,11 +3,10 @@ package com.gershire.gb.weather;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.gershire.gb.weather.fragment.WeatherFragment;
 
-public class WeatherActivity extends AppCompatActivity {
+public class WeatherActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

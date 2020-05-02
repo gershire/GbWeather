@@ -26,4 +26,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="selected_city">"Selected city: "</string>
+    <string name="apply">Apply</string>
 </resources>

@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SettingsActivity" />
         <activity
             android:name=".MainNavigationActivity"
-            android:label="@string/title_activity_main_navigation">
-        </activity>
+            android:label="@string/title_activity_main_navigation" />
         <activity android:name=".WeatherActivity" />
         <activity android:name=".FragmentedMainActivity">
             <intent-filter>
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".EnterCityActivity" />
     </application>
 
